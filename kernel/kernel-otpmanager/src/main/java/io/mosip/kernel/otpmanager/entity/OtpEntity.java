@@ -1,5 +1,6 @@
 package io.mosip.kernel.otpmanager.entity;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 
@@ -22,7 +23,7 @@ import lombok.Data;
 @Entity
 @Data
 @Table(name = "otp_transaction", schema = "kernel")
-public class OtpEntity {
+public class OtpEntity implements Serializable {
 	/**
 	 * The variable that holds the unique ID.
 	 */

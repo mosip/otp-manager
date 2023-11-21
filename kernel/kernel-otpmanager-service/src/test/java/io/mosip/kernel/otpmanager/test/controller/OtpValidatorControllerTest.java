@@ -19,9 +19,7 @@ import io.mosip.kernel.otpmanager.dto.OtpValidatorResponseDto;
 import io.mosip.kernel.otpmanager.service.impl.OtpValidatorServiceImpl;
 import io.mosip.kernel.otpmanager.test.OtpmanagerTestBootApplication;
 
-@SpringBootTest(classes = OtpmanagerTestBootApplication.class)
 @RunWith(SpringRunner.class)
-@AutoConfigureMockMvc
 public class OtpValidatorControllerTest {
 	@Mock
 	private OtpValidatorServiceImpl service;

@@ -3,11 +3,8 @@ package io.mosip.kernel.otpmanager.service.impl;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.stereotype.Service;
 
@@ -30,10 +27,6 @@ import io.mosip.kernel.otpmanager.util.OtpProvider;
 @RefreshScope
 @Service
 public class OtpGeneratorServiceImpl implements OtpGenerator<OtpGeneratorRequestDto, OtpGeneratorResponseDto> {
-	/**
-	 * The reference that autowires OtpRepository class.
-	 */
-	private static final Logger LOGGER = LoggerFactory.getLogger(OtpGeneratorServiceImpl.class);
 
 	@Autowired
 	private OtpProvider otpProvider;
@@ -73,8 +66,7 @@ public class OtpGeneratorServiceImpl implements OtpGenerator<OtpGeneratorRequest
 		/*
 		 * Checking whether the key exists in the repository.
 		 */
-		// keyCheck = otpRepository.findById(OtpEntity.class, otpDto.getKey());
-		OtpEntity keyCheck=getOtpEntityById(otpDto.getKey());
+		OtpEntity keyCheck=dataStore.findOtpByKey(otpDto.getKey());
 		if ((keyCheck != null) && (keyCheck.getStatusCode().equals(OtpStatusConstants.KEY_FREEZED.getProperty()))
 				&& (OtpManagerUtils.timeDifferenceInSeconds(keyCheck.getUpdatedDtimes(),
 						LocalDateTime.now(ZoneId.of("UTC"))) <= Integer.parseInt(keyFreezeTime))) {
@@ -92,10 +84,5 @@ public class OtpGeneratorServiceImpl implements OtpGenerator<OtpGeneratorRequest
 			response.setStatus(OtpStatusConstants.GENERATION_SUCCESSFUL.getProperty());
 		}
 		return response;
-	}
-
-	@Cacheable(value = "otpCache", key = "#otpDto.key")
-	private OtpEntity getOtpEntityById(String key){
-		return dataStore.findOtpByKey(key);
 	}
 }
