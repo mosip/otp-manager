@@ -2,6 +2,7 @@ package io.mosip.kernel.otpmanager;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cache.annotation.EnableCaching;
 
 /**
  * OTP Manager Application
@@ -13,6 +14,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 @SpringBootApplication(scanBasePackages = { "io.mosip.kernel.otpmanager.*", "${mosip.auth.adapter.impl.basepackage}",
 		"io.mosip.kernel.core.logger.config" })
+@EnableCaching
 public class OtpmanagerBootApplication {
 
 	/**

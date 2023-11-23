@@ -44,6 +44,7 @@
 
 	<modules>
 		<module>kernel-otpmanager-service</module>
+		<module>kernel-otpmanager</module>
 	</modules>
 
 	<repositories>
