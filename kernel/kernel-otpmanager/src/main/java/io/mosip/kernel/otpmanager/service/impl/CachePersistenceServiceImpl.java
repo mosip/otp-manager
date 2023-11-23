@@ -3,6 +3,7 @@ package io.mosip.kernel.otpmanager.service.impl;
 import io.mosip.kernel.core.util.StringUtils;
 import io.mosip.kernel.otpmanager.constant.SqlQueryConstants;
 import io.mosip.kernel.otpmanager.entity.OtpEntity;
+import io.mosip.kernel.otpmanager.service.PersistenceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -15,7 +16,7 @@ import java.util.Map;
 
 @ConditionalOnProperty(name = "mosip.datastore.type", havingValue = "cache")
 @Component
-public class CacheDatastoreImpl implements DataStore{
+public class CachePersistenceServiceImpl implements PersistenceService {
     @Autowired
     CacheManager cacheManager;
 
@@ -40,7 +41,7 @@ public class CacheDatastoreImpl implements DataStore{
     }
 
     @Override
-    public void updateOtp(String query, Map<String,Object> updateMap) {
+    public void updateOtp(Map<String,Object> updateMap) {
 
         OtpEntity otpEntity = cacheManager.getCache(cache).get(updateMap.get(SqlQueryConstants.ID.getProperty()).toString(), OtpEntity.class);
         for(String key: updateMap.keySet()){

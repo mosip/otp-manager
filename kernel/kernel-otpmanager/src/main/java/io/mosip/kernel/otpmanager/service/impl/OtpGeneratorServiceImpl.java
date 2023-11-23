@@ -3,6 +3,7 @@ package io.mosip.kernel.otpmanager.service.impl;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 
+import io.mosip.kernel.otpmanager.service.PersistenceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
@@ -32,7 +33,7 @@ public class OtpGeneratorServiceImpl implements OtpGenerator<OtpGeneratorRequest
 	private OtpProvider otpProvider;
 
 	@Autowired
-	DataStore dataStore;
+	PersistenceService persistenceService;
 
 	@Value("${mosip.kernel.otp.key-freeze-time}")
 	String keyFreezeTime;
@@ -66,7 +67,7 @@ public class OtpGeneratorServiceImpl implements OtpGenerator<OtpGeneratorRequest
 		/*
 		 * Checking whether the key exists in the repository.
 		 */
-		OtpEntity keyCheck=dataStore.findOtpByKey(otpDto.getKey());
+		OtpEntity keyCheck= persistenceService.findOtpByKey(otpDto.getKey());
 		if ((keyCheck != null) && (keyCheck.getStatusCode().equals(OtpStatusConstants.KEY_FREEZED.getProperty()))
 				&& (OtpManagerUtils.timeDifferenceInSeconds(keyCheck.getUpdatedDtimes(),
 						LocalDateTime.now(ZoneId.of("UTC"))) <= Integer.parseInt(keyFreezeTime))) {
@@ -79,7 +80,7 @@ public class OtpGeneratorServiceImpl implements OtpGenerator<OtpGeneratorRequest
 			otp.setId(otpDto.getKey());
 			otp.setValidationRetryCount(0);
 			otp.setOtp(generatedOtp);
-			dataStore.saveOtp(otp);
+			persistenceService.saveOtp(otp);
 			response.setOtp(generatedOtp);
 			response.setStatus(OtpStatusConstants.GENERATION_SUCCESSFUL.getProperty());
 		}

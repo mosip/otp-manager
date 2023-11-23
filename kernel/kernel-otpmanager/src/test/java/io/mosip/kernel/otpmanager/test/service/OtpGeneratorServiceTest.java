@@ -4,7 +4,7 @@ package io.mosip.kernel.otpmanager.test.service;
 import java.time.LocalDateTime;
 
 import io.mosip.kernel.otpmanager.dto.OtpGeneratorResponseDto;
-import io.mosip.kernel.otpmanager.service.impl.DataStore;
+import io.mosip.kernel.otpmanager.service.PersistenceService;
 import io.mosip.kernel.otpmanager.service.impl.OtpGeneratorServiceImpl;
 import io.mosip.kernel.otpmanager.util.OtpProvider;
 import org.junit.Assert;
@@ -22,7 +22,7 @@ import io.mosip.kernel.otpmanager.entity.OtpEntity;
 public class OtpGeneratorServiceTest {
 
 	@Mock
-	DataStore dataStore;
+    PersistenceService persistenceService;
 
 	@Mock
 	OtpProvider otpProvider;
@@ -48,7 +48,7 @@ public class OtpGeneratorServiceTest {
 		otpEntity.setUpdatedDtimes(LocalDateTime.now());
 
 //		Mockito.when(repository.findById(Mockito.any(),Mockito.anyString())).thenReturn(otpEntity);
-		Mockito.when(dataStore.findOtpByKey(Mockito.anyString())).thenReturn(otpEntity);
+		Mockito.when(persistenceService.findOtpByKey(Mockito.anyString())).thenReturn(otpEntity);
 
 		otpGeneratorService.getOtp(otpGeneratorRequestDto);
 

@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 
-import io.mosip.kernel.otpmanager.service.impl.DataStore;
+import io.mosip.kernel.otpmanager.service.PersistenceService;
 import io.mosip.kernel.otpmanager.service.impl.OtpValidatorServiceImpl;
 import io.mosip.kernel.otpmanager.util.OtpManagerUtils;
 import io.mosip.kernel.otpmanager.util.OtpProvider;
@@ -13,20 +13,17 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.util.ReflectionTestUtils;
 
 import io.mosip.kernel.otpmanager.entity.OtpEntity;
-import io.mosip.kernel.otpmanager.repository.OtpRepository;
-import io.mosip.kernel.otpmanager.test.OtpmanagerTestBootApplication;
 
 @RunWith(SpringRunner.class)
 public class OtpValidatorServiceTest {
 
 
 	@Mock
-	DataStore dataStore;
+    PersistenceService persistenceService;
 
 	@Mock
 	OtpProvider provider;
@@ -50,7 +47,7 @@ public class OtpValidatorServiceTest {
 		entity.setStatusCode("OTP_UNUSED");
 		entity.setValidationRetryCount(0);
 		entity.setUpdatedDtimes(LocalDateTime.now());
-		Mockito.when(dataStore.findOtpByKey(Mockito.anyString())).thenReturn(entity);
+		Mockito.when(persistenceService.findOtpByKey(Mockito.anyString())).thenReturn(entity);
 		otpValidatorService.validateOtp("12345","123456");
 	}
 
@@ -65,7 +62,7 @@ public class OtpValidatorServiceTest {
 		entity.setValidationRetryCount(0);
 		entity.setStatusCode("KEY_FREEZED");
 		entity.setUpdatedDtimes(LocalDateTime.now(ZoneId.of("UTC")).minus(1, ChronoUnit.MINUTES));
-		Mockito.when(dataStore.findOtpByKey(Mockito.anyString())).thenReturn(entity);
+		Mockito.when(persistenceService.findOtpByKey(Mockito.anyString())).thenReturn(entity);
 		otpValidatorService.validateOtp("12345","123456");
 	}
 
@@ -81,7 +78,7 @@ public class OtpValidatorServiceTest {
 		entity.setValidationRetryCount(0);
 		entity.setStatusCode("KEY_FREEZED");
 		entity.setUpdatedDtimes(LocalDateTime.now(ZoneId.of("UTC")));
-		Mockito.when(dataStore.findOtpByKey(Mockito.anyString())).thenReturn(entity);
+		Mockito.when(persistenceService.findOtpByKey(Mockito.anyString())).thenReturn(entity);
 		otpValidatorService.validateOtp("12345","1234");
 		}
 
@@ -97,7 +94,7 @@ public class OtpValidatorServiceTest {
 		entity.setValidationRetryCount(0);
 		entity.setStatusCode("OTP_UNUSED");
 		entity.setUpdatedDtimes(LocalDateTime.now(ZoneId.of("UTC")));
-		Mockito.when(dataStore.findOtpByKey(Mockito.anyString())).thenReturn(entity);
+		Mockito.when(persistenceService.findOtpByKey(Mockito.anyString())).thenReturn(entity);
 		otpValidatorService.validateOtp("12345","1234");
 	}
 
@@ -114,7 +111,7 @@ public class OtpValidatorServiceTest {
 		entity.setValidationRetryCount(0);
 		entity.setStatusCode("OTP_UNUSED");
 		entity.setUpdatedDtimes(LocalDateTime.now(ZoneId.of("UTC")));
-		Mockito.when(dataStore.findOtpByKey(Mockito.anyString())).thenReturn(entity);
+		Mockito.when(persistenceService.findOtpByKey(Mockito.anyString())).thenReturn(entity);
 		otpValidatorService.validateOtp("12345","1234");
 		entity.setOtp("111111");
 		otpValidatorService.validateOtp("12345","111111");

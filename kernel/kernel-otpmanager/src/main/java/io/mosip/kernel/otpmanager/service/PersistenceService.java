@@ -1,10 +1,10 @@
-package io.mosip.kernel.otpmanager.service.impl;
+package io.mosip.kernel.otpmanager.service;
 
 import io.mosip.kernel.otpmanager.entity.OtpEntity;
 
 import java.util.Map;
 
-public interface DataStore {
+public interface PersistenceService {
 
     public void saveOtp(OtpEntity otpEntity);
 
@@ -12,5 +12,5 @@ public interface DataStore {
 
     public void deleteOtpByKey(String key);
 
-    public void updateOtp(String querry, Map<String,Object> updateMap);
+    public void updateOtp(Map<String,Object> updateMap);
 }

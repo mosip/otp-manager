@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import io.mosip.kernel.otpmanager.service.PersistenceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
@@ -36,7 +37,7 @@ import io.mosip.kernel.otpmanager.util.OtpManagerUtils;
 public class OtpValidatorServiceImpl implements OtpValidator<ResponseEntity<OtpValidatorResponseDto>> {
 
 	@Autowired
-	DataStore dataStore;
+	PersistenceService persistenceService;
 
 	/**
 	 * The reference that autowires OtpManagerUtils.
@@ -77,7 +78,7 @@ public class OtpValidatorServiceImpl implements OtpValidator<ResponseEntity<OtpV
 		OtpValidatorResponseDto responseDto;
 	
 		// The OTP entity for a specific key.
-		OtpEntity otpResponse = dataStore.findOtpByKey(key);
+		OtpEntity otpResponse = persistenceService.findOtpByKey(key);
 		responseDto = new OtpValidatorResponseDto();
 		responseDto.setMessage(OtpStatusConstants.FAILURE_MESSAGE.getProperty());
 		responseDto.setStatus(OtpStatusConstants.FAILURE_STATUS.getProperty());
@@ -100,7 +101,7 @@ public class OtpValidatorServiceImpl implements OtpValidator<ResponseEntity<OtpV
 			HashMap<String, Object> updateMap = createUpdateMap(key, null, attemptCount + 1,
 					LocalDateTime.now(ZoneId.of("UTC")));
 
-			dataStore.updateOtp(UPDATE_OTP_ATTEMPT,updateMap);
+			persistenceService.updateOtp(updateMap);
 		}
 		/*
 		 * This condition freezes the key for a certain time, if the validation attempt
@@ -110,7 +111,7 @@ public class OtpValidatorServiceImpl implements OtpValidator<ResponseEntity<OtpV
 				&& (!otp.equals(otpResponse.getOtp()))) {
 			HashMap<String, Object> updateMap = createUpdateMap(key, OtpStatusConstants.KEY_FREEZED.getProperty(), 0,
 					OtpManagerUtils.getCurrentLocalDateTime());
-			dataStore.updateOtp(UPDATE_OTP_STATUS,updateMap);
+			persistenceService.updateOtp(updateMap);
 			responseDto.setStatus(OtpStatusConstants.FAILURE_STATUS.getProperty());
 			responseDto.setMessage(OtpStatusConstants.FAILURE_AND_FREEZED_MESSAGE.getProperty());
 			validationResponseEntity = new ResponseEntity<>(responseDto, HttpStatus.OK);
@@ -132,7 +133,7 @@ public class OtpValidatorServiceImpl implements OtpValidator<ResponseEntity<OtpV
 								OtpManagerUtils.getCurrentLocalDateTime())) <= (Integer.parseInt(otpExpiryLimit))))) {
 			responseDto.setStatus(OtpStatusConstants.SUCCESS_STATUS.getProperty());
 			responseDto.setMessage(OtpStatusConstants.SUCCESS_MESSAGE.getProperty());
-			dataStore.deleteOtpByKey(key);
+			persistenceService.deleteOtpByKey(key);
 			return new ResponseEntity<>(responseDto, HttpStatus.OK);
 		}
 		return validationResponseEntity;
@@ -192,9 +193,9 @@ public class OtpValidatorServiceImpl implements OtpValidator<ResponseEntity<OtpV
 					responseDto.setStatus(OtpStatusConstants.SUCCESS_STATUS.getProperty());
 					responseDto.setMessage(OtpStatusConstants.SUCCESS_MESSAGE.getProperty());
 					validationResponseEntity = new ResponseEntity<>(responseDto, HttpStatus.OK);
-					dataStore.deleteOtpByKey(key);
+					persistenceService.deleteOtpByKey(key);
 				} else {
-					dataStore.updateOtp(UPDATE_OTP_STATUS,updateMap);
+					persistenceService.updateOtp(updateMap);
 				}
 			} else {
 				responseDto.setMessage(OtpStatusConstants.FAILURE_AND_FREEZED_MESSAGE.getProperty());
