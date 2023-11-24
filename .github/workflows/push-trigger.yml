@@ -22,7 +22,7 @@ on:
       - MOSIP*
 
 jobs:
-  build-commons:
+  build-otpmanager:
     uses: mosip/kattu/.github/workflows/maven-build.yml@master
     with:
       SERVICE_LOCATION: ./
@@ -36,7 +36,7 @@ jobs:
 
   publish_to_nexus:
     if: "${{ !contains(github.ref, 'master') && github.event_name != 'pull_request' }}"
-    needs: build-commons
+    needs: build-otpmanager
     uses: mosip/kattu/.github/workflows/maven-publish-to-nexus.yml@master
     with:
       SERVICE_LOCATION: ./
@@ -49,7 +49,7 @@ jobs:
       SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
 
   sonar_analysis:
-    needs: build-commons
+    needs: build-otpmanager
     if: "${{ github.event_name != 'pull_request' }}"
     uses: mosip/kattu/.github/workflows/maven-sonar-analysis.yml@master
     with:
@@ -64,7 +64,7 @@ jobs:
       SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
 
   build-dockers:
-    needs: build-commons
+    needs: build-otpmanager
     strategy:
       matrix:
         include:
