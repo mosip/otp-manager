@@ -21,7 +21,7 @@ import lombok.Data;
  */
 @Entity
 @Data
-@Table(name = "otp_transaction", schema = "kernel")
+@Table(name = "otp_transaction", schema = "otp")
 public class OtpEntity {
 	/**
 	 * The variable that holds the unique ID.

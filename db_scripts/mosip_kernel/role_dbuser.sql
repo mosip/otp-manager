@@ -1,4 +1,4 @@
-CREATE ROLE kerneluser WITH 
+CREATE ROLE otpuser WITH 
 	INHERIT
 	LOGIN
 	PASSWORD :dbuserpwd;

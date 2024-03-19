@@ -1,17 +1,17 @@
-\c mosip_kernel 
+\c mosip_otp 
 
 GRANT CONNECT
-   ON DATABASE mosip_kernel
-   TO kerneluser;
+   ON DATABASE mosip_otp
+   TO otpuser;
 
 GRANT USAGE
-   ON SCHEMA kernel 
-   TO kerneluser;
+   ON SCHEMA otp 
+   TO otpuser;
 
 GRANT SELECT,INSERT,UPDATE,DELETE,TRUNCATE,REFERENCES
-   ON ALL TABLES IN SCHEMA kernel 
-   TO kerneluser;
+   ON ALL TABLES IN SCHEMA otp 
+   TO otpuser;
 
-ALTER DEFAULT PRIVILEGES IN SCHEMA kernel
-	GRANT SELECT,INSERT,UPDATE,DELETE,REFERENCES ON TABLES TO kerneluser;
+ALTER DEFAULT PRIVILEGES IN SCHEMA otp
+	GRANT SELECT,INSERT,UPDATE,DELETE,REFERENCES ON TABLES TO otpuser;
 
