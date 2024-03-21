@@ -57,7 +57,7 @@ jobs:
             SERVICE_NAME: 'kernel-otpmanager-service'
             BUILD_ARTIFACT: 'otp-manager'
       fail-fast: false
-    uses: abhishek8shankar/kattu/.github/workflows/docker-build.yml@develop
+    uses: mosip/kattu/.github/workflows/docker-build.yml@master
     name: ${{ matrix.SERVICE_NAME }}
     with:
       SERVICE_LOCATION: ${{ matrix.SERVICE_LOCATION }}
