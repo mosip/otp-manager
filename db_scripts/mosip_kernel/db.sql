@@ -6,7 +6,7 @@ CREATE DATABASE mosip_otp
 	OWNER = postgres
 	TEMPLATE  = template0;
 
-COMMENT ON DATABASE mosip_otp IS 'otp related logs and the data is stored in this database';
+COMMENT ON DATABASE mosip_otp IS 'OTP transactions and related data is stored in this database';
 
 \c mosip_otp postgres
 
