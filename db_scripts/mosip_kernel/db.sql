@@ -1,4 +1,4 @@
-CREATE DATABASE mosip_kernel 
+CREATE DATABASE mosip_otp 
 	ENCODING = 'UTF8' 
 	LC_COLLATE = 'en_US.UTF-8' 
 	LC_CTYPE = 'en_US.UTF-8' 
@@ -6,12 +6,12 @@ CREATE DATABASE mosip_kernel
 	OWNER = postgres
 	TEMPLATE  = template0;
 
-COMMENT ON DATABASE mosip_kernel IS 'Kernel related logs and the data is stored in this database';
+COMMENT ON DATABASE mosip_otp IS 'OTP transactions and related data is stored in this database';
 
-\c mosip_kernel postgres
+\c mosip_otp postgres
 
-DROP SCHEMA IF EXISTS kernel CASCADE;
-CREATE SCHEMA kernel;
-ALTER SCHEMA kernel OWNER TO postgres;
-ALTER DATABASE mosip_kernel SET search_path TO kernel,pg_catalog,public;
+DROP SCHEMA IF EXISTS otp CASCADE;
+CREATE SCHEMA otp;
+ALTER SCHEMA otp OWNER TO postgres;
+ALTER DATABASE mosip_otp SET search_path TO otp,pg_catalog,public;
 

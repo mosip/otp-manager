@@ -1,4 +1,4 @@
-\c mosip_kernel 
+\c mosip_otp 
 
-\ir ddl/kernel-otp_transaction.sql
+\ir ddl/otp-otp_transaction.sql
 
