@@ -53,6 +53,14 @@ public class OtpGeneratorServiceImpl implements OtpGenerator<OtpGeneratorRequest
 	@Value("${javax.persistence.jdbc.url}")
 	String jdbcUrl;
 	
+	@Value("${spring.profiles.active}")
+	String activeProfile;
+	 
+	@Value("${mosip.kernel.auth.proxy-otp-value:111111}")
+	String localOtp;
+	 
+	@Value("${mosip.kernel.auth.proxy-otp}")
+	private boolean isProxytrue;
 
 	/*
 	 * (non-Javadoc)
@@ -71,6 +79,15 @@ public class OtpGeneratorServiceImpl implements OtpGenerator<OtpGeneratorRequest
 		 */
 		OtpGeneratorResponseDto response = new OtpGeneratorResponseDto();
 		/*
+		 * Skipping OTP creation for local profile
+		 */
+		if (activeProfile.equalsIgnoreCase("local")) {
+			response.setOtp(localOtp);
+			response.setStatus(OtpStatusConstants.GENERATION_SUCCESSFUL.getProperty());
+			return response;
+		}
+
+		/*
 		 * Checking whether the key exists in the repository.
 		 */
 		String refIdHash = OtpManagerUtils.getHash(otpDto.getKey());
@@ -81,12 +98,15 @@ public class OtpGeneratorServiceImpl implements OtpGenerator<OtpGeneratorRequest
 			response.setOtp(OtpStatusConstants.SET_AS_NULL_IN_STRING.getProperty());
 			response.setStatus(OtpStatusConstants.BLOCKED_USER.getProperty());
 		} else {
-			generatedOtp = otpProvider.computeOtp(otpDto.getKey(), otpLength, macAlgorithm);
-			
+			if (isProxytrue) {
+				generatedOtp = localOtp;
+			} else {
+				generatedOtp = otpProvider.computeOtp(otpDto.getKey(), otpLength, macAlgorithm);
+			}
 			if (entityOpt.isPresent()) {
 				otpRepository.delete(entityOpt.get());
 			}
-			
+
 			OtpEntity otp = new OtpEntity();
 			otp.setId(OtpManagerUtils.getKeyOtpHash(otpDto.getKey(), generatedOtp));
 			otp.setRefId(refIdHash);
