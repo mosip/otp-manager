@@ -84,8 +84,15 @@ jobs:
       GPG_SECRET: ${{ secrets.GPG_SECRET }}
       SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
       
-  call-trivy-scan:
-    uses: mosip/kattu/.github/workflows/trivy.yml@develop
-    with:
-            service_name: 'kernel-otpmanager-service'
-            version: 'latest'
+  trivy-scan:
+     needs: build-dockers
+     uses: mosip/kattu/.github/workflows/trivy.yml@develop
+     strategy:
+      matrix:
+       include:
+        - SERVICE_NAME: 'kernel-otpmanager-service'
+
+     with:
+      service_name: ${{ matrix.SERVICE_NAME }}
+      version: $'{{ github.ref_name }}'
+
