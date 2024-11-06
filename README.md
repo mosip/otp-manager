@@ -11,7 +11,8 @@ As the name suggests, Commons refers to all the common services (also called "ke
 Refer to [SQL scripts](db_scripts).
 
 ## Build & run (for developers)
-The project requires JDK 1.11. 
+The project requires JDK 1.21.
+and mvn version - 3.9.6.
 1. Build and install:
     ```
     $ cd kernel
