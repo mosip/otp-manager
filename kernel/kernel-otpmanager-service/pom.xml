@@ -309,7 +309,7 @@
 		</snapshotRepository>
 		<repository>
 			<id>ossrh</id>
-			<url>https://central.sonatype.com/api/v1/publisher/</url>
+			<url>https://central.sonatype.com/api/v1/publisher</url>
 		</repository>
 	</distributionManagement>
 	<build>
@@ -364,7 +364,6 @@
 					</execution>
 				</executions>
 				<configuration>
-					<publishingServerId>ossrh</publishingServerId>
 					<publishingServerId>ossrh</publishingServerId>
 					<autoPublish>false</autoPublish>
 				</configuration>
