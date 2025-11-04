@@ -53,6 +53,8 @@ public class OtpValidatorController {
 	public ResponseWrapper<OtpValidatorResponseDto> validateOtp(@RequestParam("key") String key, @RequestParam("otp") String otp) {
 		ResponseWrapper<OtpValidatorResponseDto> responseWrapper = new ResponseWrapper<>();
 		responseWrapper.setResponse(otpValidatorService.validateOtp(key, otp).getBody());
-		return responseWrapper;
+        responseWrapper.setErrors(null); // Explicitly set errors to null
+        // id and version are not set as the request uses query parameters, not a RequestWrapper
+        return responseWrapper;
 	}
 }

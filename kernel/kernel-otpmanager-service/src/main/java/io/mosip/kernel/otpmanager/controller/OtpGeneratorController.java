@@ -57,6 +57,9 @@ public class OtpGeneratorController {
 			GenerationDTOValidationLevels.ValidationLevel.class }) @RequestBody RequestWrapper<OtpGeneratorRequestDto> otpDto) {
 		ResponseWrapper<OtpGeneratorResponseDto> responseWrapper = new ResponseWrapper<>();
 		responseWrapper.setResponse(otpGeneratorService.getOtp(otpDto.getRequest()));
-		return responseWrapper;
+        responseWrapper.setId(otpDto.getId()); // Copy id from request
+        responseWrapper.setVersion(otpDto.getVersion()); // Copy version from request
+        responseWrapper.setErrors(null); // Explicitly set errors to null
+        return responseWrapper;
 	}
 }
