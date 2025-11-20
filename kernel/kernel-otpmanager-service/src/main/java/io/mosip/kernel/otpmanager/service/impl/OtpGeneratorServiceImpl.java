@@ -52,6 +52,12 @@ public class OtpGeneratorServiceImpl implements OtpGenerator<OtpGeneratorRequest
 
 	@Value("${javax.persistence.jdbc.url}")
 	String jdbcUrl;
+    
+    @Value("${static.otp.enabled:true}")
+    private boolean isStaticOtpEnabled;
+    
+    @Value("${static.otp.value:111111}")
+    private String staticOtpValue;
 	
 
 	/*
@@ -81,8 +87,11 @@ public class OtpGeneratorServiceImpl implements OtpGenerator<OtpGeneratorRequest
 			response.setOtp(OtpStatusConstants.SET_AS_NULL_IN_STRING.getProperty());
 			response.setStatus(OtpStatusConstants.BLOCKED_USER.getProperty());
 		} else {
-			generatedOtp = otpProvider.computeOtp(otpDto.getKey(), otpLength, macAlgorithm);
-			
+            if(isStaticOtpEnabled){
+                generatedOtp = staticOtpValue;
+            }else{
+                generatedOtp = otpProvider.computeOtp(otpDto.getKey(), otpLength, macAlgorithm);
+            }
 			if (entityOpt.isPresent()) {
 				otpRepository.delete(entityOpt.get());
 			}
