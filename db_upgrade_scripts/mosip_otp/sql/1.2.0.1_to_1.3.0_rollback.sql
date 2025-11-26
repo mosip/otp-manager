@@ -1,1 +1,4 @@
-\echo 'Rollback Queries not required for transition from $CURRENT_VERSION to $UPGRADE_VERSION'
+\c mosip_otp
+
+
+TRUNCATE TABLE IF EXISTS otp.otp_transaction;
