@@ -20,7 +20,7 @@ echo "UPGRADE version: $UPGRADE_VERSION"
 echo "Action: $ACTION"
 
 SOURCE_DB1_NAME=mosip_kernel
-SOURCE_DB1_SUPPORT_FILE=sql/${CURRENT_VERSION}_to_${UPGRADE_VERSION}_mosip_otp_support.sql
+SOURCE_DB1_SUPPORT_FILE=sql/${CURRENT_VERSION}_to_${UPGRADE_VERSION}_support.sql
 
 # Terminate existing connections
 echo "Terminating active connections"
