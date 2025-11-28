@@ -1,8 +1,6 @@
 #!/bin/bash
 
 set -e
-SOURCE_DB1_NAME=mosip_kernel
-SOURCE_DB1_SUPPORT_FILE=sql/1.2.0.1_to_1.3.0_mosip_otp_support.sql
 properties_file="$1"
 echo `date "+%m/%d/%Y %H:%M:%S"` ": $properties_file"
 if [ -f "$properties_file" ]
@@ -21,6 +19,9 @@ echo "Current version: $CURRENT_VERSION"
 echo "UPGRADE version: $UPGRADE_VERSION"
 echo "Action: $ACTION"
 
+SOURCE_DB1_NAME=mosip_kernel
+SOURCE_DB1_SUPPORT_FILE=sql/${CURRENT_VERSION}_to_${UPGRADE_VERSION}_mosip_otp_support.sql
+
 # Terminate existing connections
 echo "Terminating active connections"
 CONN=$(PGPASSWORD=$SU_USER_PWD psql -v ON_ERROR_STOP=1 --username=$SU_USER --host=$DB_SERVERIP --port=$DB_PORT --dbname=$DEFAULT_DB_NAME -t -c "SELECT count(pg_terminate_backend(pg_stat_activity.pid)) FROM pg_stat_activity WHERE datname = '$MOSIP_DB_NAME' AND pid <> pg_backend_pid()";exit;)
@@ -32,9 +33,10 @@ if [ "$ACTION" == "upgrade" ]; then
   UPGRADE_SCRIPT_FILE="sql/${CURRENT_VERSION}_to_${UPGRADE_VERSION}_upgrade.sql"
   if [ -f "$UPGRADE_SCRIPT_FILE" ]; then
     echo "Executing upgrade script $UPGRADE_SCRIPT_FILE"
-    if [[ "$UPGRADE_VERSION" == "1.3.0"  &&  "$CURRENT_VERSION" == "1.2.0.1" ]]; then
+    if [ -f "$SOURCE_DB1_SUPPORT_FILE" ]; then
       echo "Creating dml directory."
       mkdir -p dml
+      echo "Executing support file: $SOURCE_DB1_SUPPORT_FILE"
       PGPASSWORD=$SU_USER_PWD psql -v ON_ERROR_STOP=1 --username=$SU_USER --host=$DB_SERVERIP --port=$DB_PORT --dbname=$SOURCE_DB1_NAME -a -b -f $SOURCE_DB1_SUPPORT_FILE
     fi
     PGPASSWORD=$SU_USER_PWD psql -v ON_ERROR_STOP=1 --username=$SU_USER --host=$DB_SERVERIP --port=$DB_PORT --dbname=$DEFAULT_DB_NAME -a -b -f $UPGRADE_SCRIPT_FILE
