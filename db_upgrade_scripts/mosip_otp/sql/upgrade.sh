@@ -2,7 +2,7 @@
 
 set -e
 SOURCE_DB1_NAME=mosip_kernel
-SOURCE_DB1_SUPPORT_FILE=sql/1.2.0.1_to_1.2.0.2_mosip_otp_support.sql
+SOURCE_DB1_SUPPORT_FILE=1.2.0.1_to_1.3.0_support.sql
 properties_file="$1"
 echo `date "+%m/%d/%Y %H:%M:%S"` ": $properties_file"
 if [ -f "$properties_file" ]
@@ -29,10 +29,10 @@ echo "Terminated connections"
 # Execute upgrade or rollback
 if [ "$ACTION" == "upgrade" ]; then
   echo "Upgrading database from $CURRENT_VERSION to $UPGRADE_VERSION"
-  UPGRADE_SCRIPT_FILE="sql/${CURRENT_VERSION}_to_${UPGRADE_VERSION}_upgrade.sql"
+  UPGRADE_SCRIPT_FILE="${CURRENT_VERSION}_to_${UPGRADE_VERSION}_upgrade.sql"
   if [ -f "$UPGRADE_SCRIPT_FILE" ]; then
     echo "Executing upgrade script $UPGRADE_SCRIPT_FILE"
-    if [[ "$UPGRADE_VERSION" == "1.2.0.2"  &&  "$CURRENT_VERSION" == "1.2.0.1" ]]; then
+    if [[ "$UPGRADE_VERSION" == "1.3.0"  &&  "$CURRENT_VERSION" == "1.2.0.1" ]]; then
       echo "Creating dml directory."
       mkdir -p dml
       PGPASSWORD=$SU_USER_PWD psql -v ON_ERROR_STOP=1 --username=$SU_USER --host=$DB_SERVERIP --port=$DB_PORT --dbname=$SOURCE_DB1_NAME -a -b -f $SOURCE_DB1_SUPPORT_FILE
@@ -44,7 +44,7 @@ if [ "$ACTION" == "upgrade" ]; then
   fi
 elif [ $ACTION == "rollback" ]; then
   echo "Rolling back database for $CURRENT_VERSION to $UPGRADE_VERSION"
-  REVOKE_SCRIPT_FILE="sql/${CURRENT_VERSION}_to_${UPGRADE_VERSION}_rollback.sql"
+  REVOKE_SCRIPT_FILE="${CURRENT_VERSION}_to_${UPGRADE_VERSION}_rollback.sql"
   if [ -f "$REVOKE_SCRIPT_FILE" ]; then
     echo "Executing rollback script $REVOKE_SCRIPT_FILE"
     PGPASSWORD=$SU_USER_PWD psql -v ON_ERROR_STOP=1 --username=$SU_USER --host=$DB_SERVERIP --port=$DB_PORT --dbname=$DEFAULT_DB_NAME -a -b -f $REVOKE_SCRIPT_FILE
