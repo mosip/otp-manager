@@ -20,8 +20,8 @@ Homepage: https://springdoc.org
 
 ================================================================================
 Package: PostgreSQL JDBC Driver
-Version: Not specified in SBOM
-License: PostgreSQL License (Inferred)
+Version: 42.2.2
+License: BSD 2-Clause License (Simplified BSD)
 Homepage: https://jdbc.postgresql.org/
 ================================================================================
 
@@ -42,7 +42,7 @@ Homepage: https://github.com/sonatype-nexus-community/central-publishing
 ================================================================================
 Package: Git Commit ID Maven Plugin (pl.project13.maven:git-commit-id-plugin)
 Version: 3.0.1
-License: Apache License 2.0 (Inferred)
+License: GNU Lesser General Public License v3.0 (LGPL-3.0)
 Homepage: https://github.com/git-commit-id/git-commit-id-maven-plugin
 ================================================================================
 
