@@ -39,6 +39,16 @@ public class OtpManagerUtils {
 	
 	private static final String KEY_OTP_SEPARATOR = ":";
 
+    @FunctionalInterface
+    public static interface HmacProvider {
+        String digest(byte[] bytes) throws NoSuchAlgorithmException;
+    }
+
+    /**
+     * Default provider that delegates to HMACUtils2. Tests can replace this
+     * provider to simulate failures.
+     */
+    public static volatile HmacProvider HMAC_PROVIDER = HMACUtils2::digestAsPlainText;
 	/**
 	 * This method returns the difference between two LocalDateTime objects in
 	 * seconds.
@@ -100,7 +110,7 @@ public class OtpManagerUtils {
 
 	public static String getHash(String string) {
 		try {
-			return HMACUtils2.digestAsPlainText(string.getBytes());
+			return HMAC_PROVIDER.digest(string.getBytes());
 		} catch (NoSuchAlgorithmException e) {
 			throw new BaseUncheckedException(OtpErrorConstants.OTP_GEN_ALGO_FAILURE.getErrorCode(),
 					OtpErrorConstants.OTP_GEN_ALGO_FAILURE.getErrorMessage(), e);

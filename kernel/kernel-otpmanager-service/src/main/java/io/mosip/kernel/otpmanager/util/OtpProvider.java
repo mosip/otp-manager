@@ -48,11 +48,11 @@ public class OtpProvider {
 	 * @param macAlgo the crypto algorithm.
 	 * @return the signer.
 	 */
-	static Signer getSigning(String secret, String macAlgo) {
+	public static Signer getSigning(String secret, String macAlgo) {
 		try {
 			final Mac mac = Mac.getInstance(macAlgo);
 			mac.init(new SecretKeySpec(secret.getBytes(), ""));
-			return (byte[] data) -> mac.doFinal(data);
+			 return mac::doFinal;
 		} catch (NoSuchAlgorithmException | InvalidKeyException error) {
 			throw new OtpServiceException(OtpErrorConstants.OTP_GEN_ALGO_FAILURE.getErrorCode(),
 					OtpErrorConstants.OTP_GEN_ALGO_FAILURE.getErrorMessage(), error);

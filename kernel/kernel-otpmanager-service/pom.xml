@@ -218,18 +218,12 @@
 		<maven.deploy.plugin.version>2.8.1</maven.deploy.plugin.version>
 		<central.publishing.maven.plugin.version>0.7.0</central.publishing.maven.plugin.version>
         <sonar.coverage.exclusions>
-            **/code/**,
             **/config/**,
             **/dao/**,
             **/dto/**,
             **/entity/**,
             **/exception/**,
-            **/exception/util/**,
-            **/repository/**,
-            **/*Config.java,
-            **/*Application.java,
-            **/util/**,
-            io/mosip/kernel/otpmanager/entity/**
+            **/constant/**,
         </sonar.coverage.exclusions>
         <sonar.cpd.exclusions>**/dto/**,**/entity/**,**/config/**</sonar.cpd.exclusions>
 	</properties>
@@ -312,6 +306,11 @@
     <groupId>org.junit.vintage</groupId>
     <artifactId>junit-vintage-engine</artifactId> 
   </dependency>
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 
 	<distributionManagement>
@@ -469,6 +468,16 @@
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
 				<version>${jacoco.maven.plugin.version}</version>
+                <configuration>
+                    <excludes>
+                        <exclude>**/entity/**</exclude>
+                        <exclude>**/dto/**</exclude>
+                        <exclude>**/exception/**</exclude>
+                        <exclude>**/config/**</exclude>
+                        <exclude>**/constant/**</exclude>
+                        <exclude>**/*Application.class</exclude>
+                    </excludes>
+                </configuration>
 				<executions>
 					<execution>
 						<goals>
