@@ -217,6 +217,21 @@
 		<springdoc.version>1.5.10</springdoc.version>
 		<maven.deploy.plugin.version>2.8.1</maven.deploy.plugin.version>
 		<central.publishing.maven.plugin.version>0.7.0</central.publishing.maven.plugin.version>
+        <sonar.coverage.exclusions>
+            **/code/**,
+            **/config/**,
+            **/dao/**,
+            **/dto/**,
+            **/entity/**,
+            **/exception/**,
+            **/exception/util/**,
+            **/repository/**,
+            **/*Config.java,
+            **/*Application.java,
+            **/util/**,
+            io/mosip/kernel/otpmanager/entity/**
+        </sonar.coverage.exclusions>
+        <sonar.cpd.exclusions>**/dto/**,**/entity/**,**/config/**</sonar.cpd.exclusions>
 	</properties>
 	<name>kernel-otpmanager-service</name>
 	<description>Mosip commons project </description>
