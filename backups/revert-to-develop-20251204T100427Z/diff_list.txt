@@ -1,0 +1,12 @@
+kernel/kernel-otpmanager-service/pom.xml
+kernel/kernel-otpmanager-service/src/main/java/io/mosip/kernel/otpmanager/util/OtpManagerUtils.java
+kernel/kernel-otpmanager-service/src/main/java/io/mosip/kernel/otpmanager/util/OtpProvider.java
+kernel/kernel-otpmanager-service/src/main/java/io/mosip/kernel/otpmanager/util/PasscodeGenerator.java
+kernel/kernel-otpmanager-service/src/test/java/io/mosip/kernel/otpmanager/test/repository/OtpRepositoryTest.java
+kernel/kernel-otpmanager-service/src/test/java/io/mosip/kernel/otpmanager/test/repository/PlainJpaOtpRepositoryTest.java
+kernel/kernel-otpmanager-service/src/test/java/io/mosip/kernel/otpmanager/test/service/OtpGeneratorServiceTest.java
+kernel/kernel-otpmanager-service/src/test/java/io/mosip/kernel/otpmanager/test/service/OtpValidatorServiceUnitTest.java
+kernel/kernel-otpmanager-service/src/test/java/io/mosip/kernel/otpmanager/test/util/OtpManagerUtilsTest.java
+kernel/kernel-otpmanager-service/src/test/java/io/mosip/kernel/otpmanager/test/util/OtpProviderTest.java
+kernel/kernel-otpmanager-service/src/test/java/io/mosip/kernel/otpmanager/test/util/PasscodeGeneratorTest.java
+kernel/kernel-otpmanager-service/src/test/resources/META-INF/persistence.xml

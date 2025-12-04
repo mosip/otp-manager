@@ -1,4 +1,4 @@
-package io.mosip.kernel.otpmanager.test.util;
+package io.mosip.kernel.otpmanager.util;
 
 import static org.junit.Assert.assertEquals;
 
