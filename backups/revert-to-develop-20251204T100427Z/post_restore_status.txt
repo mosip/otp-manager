@@ -1,7 +1,0 @@
-M  kernel/kernel-otpmanager-service/pom.xml
-M  kernel/kernel-otpmanager-service/src/main/java/io/mosip/kernel/otpmanager/util/OtpManagerUtils.java
-M  kernel/kernel-otpmanager-service/src/main/java/io/mosip/kernel/otpmanager/util/OtpProvider.java
-M  kernel/kernel-otpmanager-service/src/main/java/io/mosip/kernel/otpmanager/util/PasscodeGenerator.java
-M  kernel/kernel-otpmanager-service/src/test/java/io/mosip/kernel/otpmanager/test/service/OtpGeneratorServiceTest.java
-M  kernel/kernel-otpmanager-service/src/test/java/io/mosip/kernel/otpmanager/test/util/OtpProviderTest.java
-?? backups/
