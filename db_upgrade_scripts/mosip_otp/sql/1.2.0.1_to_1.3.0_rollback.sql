@@ -1,4 +1,5 @@
-\c mosip_otp
+-- Drop database
+DROP DATABASE IF EXISTS mosip_otp;
 
-
-TRUNCATE TABLE otp.otp_transaction;
+-- Drop role
+drop role if exists otpuser;
