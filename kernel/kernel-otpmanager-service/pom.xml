@@ -223,7 +223,7 @@
             **/dto/**,
             **/entity/**,
             **/exception/**,
-            **/constant/**,
+            **/constant/**
         </sonar.coverage.exclusions>
         <sonar.cpd.exclusions>**/dto/**,**/entity/**,**/config/**</sonar.cpd.exclusions>
     </properties>
