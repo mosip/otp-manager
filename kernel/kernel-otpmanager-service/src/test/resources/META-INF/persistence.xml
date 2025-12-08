@@ -4,7 +4,8 @@
     <class>io.mosip.kernel.otpmanager.entity.OtpEntity</class>
     <properties>
       <property name="jakarta.persistence.jdbc.driver" value="org.h2.Driver"/>
-      <property name="jakarta.persistence.jdbc.url" value="jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;INIT=CREATE SCHEMA IF NOT EXISTS OTP;SET SCHEMA OTP"/>      <property name="jakarta.persistence.jdbc.user" value="sa"/>
+      <property name="jakarta.persistence.jdbc.url" value="jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;INIT=CREATE SCHEMA IF NOT EXISTS OTP;SET SCHEMA OTP"/>
+      <property name="jakarta.persistence.jdbc.user" value="sa"/>
       <property name="jakarta.persistence.jdbc.password" value=""/>
 
       <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
