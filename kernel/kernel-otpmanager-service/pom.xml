@@ -218,7 +218,16 @@
 		<springdoc.version>1.5.10</springdoc.version>
 		<maven.deploy.plugin.version>3.1.1</maven.deploy.plugin.version>
 		<central.publishing.maven.plugin.version>0.7.0</central.publishing.maven.plugin.version>
-	</properties>
+        <sonar.coverage.exclusions>
+            **/config/**,
+            **/dao/**,
+            **/dto/**,
+            **/entity/**,
+            **/exception/**,
+            **/constant/**,
+        </sonar.coverage.exclusions>
+        <sonar.cpd.exclusions>**/dto/**,**/entity/**,**/config/**</sonar.cpd.exclusions>
+    </properties>
 	<name>kernel-otpmanager-service</name>
 	<description>Mosip commons project </description>
 	<url>https://github.com/mosip/commons</url>
@@ -298,7 +307,14 @@
     <groupId>org.junit.vintage</groupId>
     <artifactId>junit-vintage-engine</artifactId> 
   </dependency>
-	</dependencies>
+        <!-- H2 database for tests -->
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <!-- (PowerMock and additional mockito removed to avoid runtime conflicts) -->
+ 	</dependencies>
 
 	<distributionManagement>
 		<snapshotRepository>
@@ -456,6 +472,16 @@
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
 				<version>${jacoco.maven.plugin.version}</version>
+                <configuration>
+                    <excludes>
+                        <exclude>**/entity/**</exclude>
+                        <exclude>**/dto/**</exclude>
+                        <exclude>**/exception/**</exclude>
+                        <exclude>**/config/**</exclude>
+                        <exclude>**/constant/**</exclude>
+                        <exclude>**/*Application.class</exclude>
+                    </excludes>
+                </configuration>
 				<executions>
 					<execution>
 						<goals>
@@ -527,5 +553,35 @@
 				</plugins>
 			</build>
 		</profile>
+        <profile>
+            <id>sonar</id>
+            <properties>
+                <sonar.sources>.</sonar.sources>
+                <sonar.inclusions>src/main/java/**,src/main/resources/**</sonar.inclusions>
+                <sonar.exclusions>${sonar.coverage.exclusions}</sonar.exclusions>
+                <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+            </properties>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.sonarsource.scanner.maven</groupId>
+                        <artifactId>sonar-maven-plugin</artifactId>
+                        <version>${maven.sonar.plugin.version}</version>
+                        <executions>
+                            <execution>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sonar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                </plugins>
+            </build>
+        </profile>
 	</profiles>
 </project>

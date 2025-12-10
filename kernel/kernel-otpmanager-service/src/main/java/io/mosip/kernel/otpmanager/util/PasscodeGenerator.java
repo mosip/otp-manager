@@ -29,7 +29,7 @@ public class PasscodeGenerator {
 	/**
 	 * Using an interface to allow us to inject different signature implementations.
 	 */
-	interface Signer {
+    public interface Signer {
 		/**
 		 * @param data Preimage to sign, represented as sequence of arbitrary bytes
 		 * @return Signature as sequence of bytes.
