@@ -1,9 +1,12 @@
+[![Maven Package upon a push](https://github.com/mosip/otp-manager/actions/workflows/push_trigger.yml/badge.svg?branch=release-1.2.0.1)](https://github.com/mosip/otp-manager/actions/workflows/push_trigger.yml)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=mosip_otp-manager&metric=alert_status)](https://sonarcloud.io/dashboard?branch=release-1.2.0.1&id=mosip_otp-manager)
+
 # OTP Manager
 
 ## Overview
 The OTP Manager Service is a core component responsible for the secure generation, validation, and lifecycle management of One-Time Passwords (OTPs). It serves as a critical trust anchor for authentication flows within the MOSIP ecosystem, ensuring that OTPs are generated with high entropy and validated strictly against expiration and usage policies.
 
-Refer [otp-manager](https://docs.mosip.io/1.1.5/modules/kernel/common-services-functionality) for more details.
+Refer to [otp-manager](https://docs.mosip.io/1.1.5/modules/kernel/common-services-functionality) for more details.
 
 ## Features
 - **OTP Generation**: Supports numeric and alphanumeric OTPs with configurable length.
@@ -28,14 +31,10 @@ There are three ways to set up the OTP Manager service locally:
 - Maven 3.9.x
 - PostgreSQL 10 or higher
 - Docker (for Docker-based setup)
+- Build and run config server (refer to [MOSIP Configuration](https://github.com/mosip/mosip-config/blob/master/README.md) for more details) 
 
 ## Database Setup
 The OTP Manager service requires a PostgreSQL database.
-
-**Clone the Repository**
-   ```bash
-   git clone https://github.com/mosip/otp-manager.git
-   ```
 
 **Option 1: Using Deployment Script (Recommended)**
 1. Navigate to the `db_scripts/mosip_otp` directory.
@@ -70,25 +69,53 @@ The service configuration can be found in `kernel/kernel-otpmanager-service/src/
 - `mosip.kernel.otp.max-key-length`: Maximum length of the key.
 
 ## Local Deployment
-1. **Clone the Repository**
-   ```bash
-   git clone https://github.com/mosip/otp-manager.git
-   ```
 
-2. **Build the Project**
+1. **Build the Project**
    Navigate to the kernel directory and build the project.
    ```bash
    cd kernel
    mvn clean install -Dgpg.skip=true
    ```
 
+2. **Download Auth Adapter (Optional)**
+   If you need to use a specific version of the auth adapter or want to manage it separately, download it from Maven Central:
+   
+   - **Maven Central**: [kernel-auth-adapter](https://search.maven.org/search?q=g:io.mosip.kernel%20AND%20a:kernel-auth-adapter)
+   - **Direct Download**: Replace `VERSION` with the desired version (e.g., `1.2.0.1`)
+     ```
+     https://repo1.maven.org/maven2/io/mosip/kernel/kernel-auth-adapter/VERSION/kernel-auth-adapter-VERSION.jar
+     ```
+   
+   ```bash
+   # Create lib directory
+   mkdir -p kernel-otpmanager-service/lib
+   
+   # Download auth adapter from Maven Central (replace VERSION with the desired version, e.g., 1.2.0.1)
+   cd kernel-otpmanager-service/lib
+   wget https://repo1.maven.org/maven2/io/mosip/kernel/kernel-auth-adapter/VERSION/kernel-auth-adapter-VERSION.jar -O kernel-auth-adapter.jar
+   ```
+   
+   Or using curl:
+   ```bash
+   curl -o kernel-auth-adapter.jar https://repo1.maven.org/maven2/io/mosip/kernel/kernel-auth-adapter/VERSION/kernel-auth-adapter-VERSION.jar
+   ```
 
 3. **Run the Service**
    Navigate to the service directory and run the application.
+   
+   **If you downloaded auth adapter manually:**
    ```bash
    cd kernel-otpmanager-service
-   java -jar target/kernel-otpmanager-service-*.jar
+   java -jar -Dloader.path=./lib -Dspring.profiles.active=local target/kernel-otpmanager-service-*.jar
    ```
+   
+   **If using built-in dependency (default):**
+   ```bash
+   cd kernel-otpmanager-service
+   java -jar -Dspring.profiles.active=local target/kernel-otpmanager-service-*.jar
+   ```
+
+> **Note**: Ensure the config server is running before starting the service. The auth adapter JAR is included as a dependency in the project by default, but you can also download it manually from Maven Central and specify it using `-Dloader.path` if needed.
 
 ## Local Setup using docker image
 1. Pull the docker image from the docker hub:
@@ -100,26 +127,22 @@ The service configuration can be found in `kernel/kernel-otpmanager-service/src/
    docker run -d --name otpmanager-service \
      -p 8085:8085 \
      -e active_profile_env=local \
-     mosip/kernel-otpmanager-service
+     mosipid/kernel-otpmanager-service:latest
    ```
 
 ## Local Setup by building docker image
-1. **Clone the Repository**
-   ```bash
-   git clone https://github.com/mosip/otp-manager.git
-   ```
-2. **Build the Docker image**
+1. **Build the Docker image**
    Navigate to the service directory and build the image.
    ```bash
    cd kernel/kernel-otpmanager-service
    docker build -t mosip/kernel-otpmanager-service .
    ```
-3. **Run the Docker container**
+2. **Run the Docker container**
    ```bash
    docker run -d --name otpmanager-service \
      -p 8085:8085 \
      -e active_profile_env=local \
-     mosip/kernel-otpmanager-service
+     mosip/kernel-otpmanager-service:latest
    ```
 
 ## Deployment
@@ -144,3 +167,5 @@ We welcome contributions from everyone!
 If you have any questions or run into issues while trying out the application, feel free to post them in the [MOSIP Community](https://community.mosip.io/) — we’ll be happy to help you out.
 
 [GitHub Issues](https://github.com/mosip/otp-manager/issues)
+
+![License: MPL 2.0](https://img.shields.io/badge/License-MPL_2.0-brightgreen.svg)
