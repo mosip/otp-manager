@@ -18,7 +18,7 @@ Refer to [otp-manager](https://docs.mosip.io/1.1.5/modules/kernel/common-service
 ## Services
 - **kernel-otpmanager-service**: The core microservice that exposes REST APIs for generating and validating OTPs.
 
-> **Note**: Use Mosip Auth Adaptor for authentication and authorization to access the Rest APIs.
+> **Note**: Use Mosip Auth Adapter for authentication and authorization to access the Rest APIs.
 
 ## Local Setup
 There are three ways to set up the OTP Manager service locally:
@@ -36,7 +36,7 @@ There are three ways to set up the OTP Manager service locally:
 ## Database Setup
 The OTP Manager service requires a PostgreSQL database.
 
-**Option 1: Using Deployment Script (Recommended)**
+### Option 1: Using Deployment Script (Recommended) ###
 1. Navigate to the `db_scripts/mosip_otp` directory.
 2. Run the `deploy.sh` script.
 
@@ -45,7 +45,7 @@ The OTP Manager service requires a PostgreSQL database.
    ./deploy.sh
    ```
 
-**Option 2: Manual Setup**
+### Option 2: Manual Setup ###
 1. Create a database
    Log into postgresql and create a database for the OTP Manager service.
    ```sql
@@ -82,7 +82,7 @@ The service configuration can be found in `kernel/kernel-otpmanager-service/src/
    
    - **Maven Central**: [kernel-auth-adapter](https://search.maven.org/search?q=g:io.mosip.kernel%20AND%20a:kernel-auth-adapter)
    - **Direct Download**: Replace `VERSION` with the desired version (e.g., `1.2.0.1`)
-     ```
+     ```text
      https://repo1.maven.org/maven2/io/mosip/kernel/kernel-auth-adapter/VERSION/kernel-auth-adapter-VERSION.jar
      ```
    
