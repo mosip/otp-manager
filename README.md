@@ -103,7 +103,7 @@ The service configuration can be found in `kernel/kernel-otpmanager-service/src/
    
    **If you downloaded auth adapter manually:**
    ```bash
-   cd kernel-otpmanager-service
+   cd kernel/kernel-otpmanager-service
    java -jar -Dloader.path=./lib -Dspring.profiles.active=local target/kernel-otpmanager-service-*.jar
    ```
    
