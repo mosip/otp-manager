@@ -68,6 +68,8 @@ The service configuration can be found in `kernel/kernel-otpmanager-service/src/
 
 ## Local Deployment
 
+Before running this service, make sure the config service is running.
+
 1. **Build the Project**
    Navigate to the kernel directory and build the project.
    ```bash
@@ -81,7 +83,7 @@ The service configuration can be found in `kernel/kernel-otpmanager-service/src/
    - **Maven Central**: [kernel-auth-adapter](https://search.maven.org/search?q=g:io.mosip.kernel%20AND%20a:kernel-auth-adapter)
    - **Direct Download**: Replace `VERSION` with the desired version (e.g., `1.2.0.1`)
      ```text
-     https://repo1.maven.org/maven2/io/mosip/kernel/kernel-auth-adapter/VERSION/kernel-auth-adapter-VERSION.jar
+     https://repo1.maven.org/maven2/io/mosip/kernel/kernel-auth-adapter/{VERSION}/kernel-auth-adapter-{VERSION}.jar
      ```
    
    ```bash
@@ -90,12 +92,12 @@ The service configuration can be found in `kernel/kernel-otpmanager-service/src/
    
    # Download auth adapter from Maven Central (replace VERSION with the desired version, e.g., 1.2.0.1)
    cd kernel/kernel-otpmanager-service/lib
-   wget https://repo1.maven.org/maven2/io/mosip/kernel/kernel-auth-adapter/VERSION/kernel-auth-adapter-VERSION.jar -O kernel-auth-adapter.jar
+   wget https://repo1.maven.org/maven2/io/mosip/kernel/kernel-auth-adapter/{VERSION}/kernel-auth-adapter-{VERSION}.jar -O kernel-auth-adapter.jar
    ```
    
    Or using curl:
    ```bash
-   curl -o kernel-auth-adapter.jar https://repo1.maven.org/maven2/io/mosip/kernel/kernel-auth-adapter/VERSION/kernel-auth-adapter-VERSION.jar
+   curl -o kernel-auth-adapter.jar https://repo1.maven.org/maven2/io/mosip/kernel/kernel-auth-adapter/{VERSION}/kernel-auth-adapter-{VERSION}.jar
    ```
 
 3. **Run the Service**
