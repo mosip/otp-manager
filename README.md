@@ -1,12 +1,10 @@
-[![Maven Package upon a push](https://github.com/mosip/otp-manager/actions/workflows/push_trigger.yml/badge.svg?branch=release-1.2.0.1)](https://github.com/mosip/otp-manager/actions/workflows/push_trigger.yml)
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=mosip_otp-manager&metric=alert_status)](https://sonarcloud.io/dashboard?branch=release-1.2.0.1&id=mosip_otp-manager)
+[![Maven Package upon a push](https://github.com/mosip/otp-manager/actions/workflows/push-trigger.yml/badge.svg?branch=develop)](https://github.com/mosip/otp-manager/actions/workflows/push_trigger.yml)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=mosip_otp-manager&metric=alert_status)](https://sonarcloud.io/dashboard?branch=develop&id=mosip_otp-manager)
 
 # OTP Manager
 
 ## Overview
 The OTP Manager Service is a core component responsible for the secure generation, validation, and lifecycle management of One-Time Passwords (OTPs). It serves as a critical trust anchor for authentication flows within the MOSIP ecosystem, ensuring that OTPs are generated with high entropy and validated strictly against expiration and usage policies.
-
-Refer to [otp-manager](https://docs.mosip.io/1.1.5/modules/kernel/common-services-functionality) for more details.
 
 ## Features
 - **OTP Generation**: Supports numeric and alphanumeric OTPs with configurable length.
@@ -18,7 +16,7 @@ Refer to [otp-manager](https://docs.mosip.io/1.1.5/modules/kernel/common-service
 ## Services
 - **kernel-otpmanager-service**: The core microservice that exposes REST APIs for generating and validating OTPs.
 
-> **Note**: Use Mosip Auth Adapter for authentication and authorization to access the Rest APIs.
+> **Note**: Use Mosip Auth Adapter for authentication and authorization to access the REST APIs.
 
 ## Local Setup
 There are three ways to set up the OTP Manager service locally:
@@ -36,7 +34,7 @@ There are three ways to set up the OTP Manager service locally:
 ## Database Setup
 The OTP Manager service requires a PostgreSQL database.
 
-### Option 1: Using Deployment Script (Recommended) ###
+### Option 1: Using Deployment Script (Recommended)
 1. Navigate to the `db_scripts/mosip_otp` directory.
 2. Run the `deploy.sh` script.
 
@@ -45,7 +43,7 @@ The OTP Manager service requires a PostgreSQL database.
    ./deploy.sh
    ```
 
-### Option 2: Manual Setup ###
+### Option 2: Manual Setup
 1. Create a database
    Log into postgresql and create a database for the OTP Manager service.
    ```sql
@@ -88,10 +86,10 @@ The service configuration can be found in `kernel/kernel-otpmanager-service/src/
    
    ```bash
    # Create lib directory
-   mkdir -p kernel-otpmanager-service/lib
+   mkdir -p kernel/kernel-otpmanager-service/lib
    
    # Download auth adapter from Maven Central (replace VERSION with the desired version, e.g., 1.2.0.1)
-   cd kernel-otpmanager-service/lib
+   cd kernel/kernel-otpmanager-service/lib
    wget https://repo1.maven.org/maven2/io/mosip/kernel/kernel-auth-adapter/VERSION/kernel-auth-adapter-VERSION.jar -O kernel-auth-adapter.jar
    ```
    
@@ -111,7 +109,7 @@ The service configuration can be found in `kernel/kernel-otpmanager-service/src/
    
    **If using built-in dependency (default):**
    ```bash
-   cd kernel-otpmanager-service
+   cd kernel/kernel-otpmanager-service
    java -jar -Dspring.profiles.active=local target/kernel-otpmanager-service-*.jar
    ```
 
