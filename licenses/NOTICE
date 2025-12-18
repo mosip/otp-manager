@@ -1,0 +1,48 @@
+================================================================================
+COPYRIGHT NOTICES
+================================================================================
+
+This software incorporates components from the projects listed below. The
+original copyright notices have been preserved in accordance with the terms
+of their respective licenses:
+
+Spring Framework & Spring Boot
+  Copyright © 2002-2024 Pivotal Software, Inc.
+  Copyright © 2002-2024 VMware, Inc. or its affiliates.
+  Licensed under the Apache License, Version 2.0
+
+PostgreSQL JDBC Driver
+  Copyright (c) 1997, PostgreSQL Global Development Group
+  Licensed under the BSD 2-Clause License
+
+SpringDoc OpenAPI
+  Copyright © 2019-2024 springdoc.org
+  Licensed under the Apache License, Version 2.0
+
+JSON Simple
+  Copyright 2006 Yidong Fang
+  Licensed under the Apache License, Version 2.0
+
+JUnit Vintage Engine
+  Copyright © 2015-2024 the original author or authors
+  Licensed under the Eclipse Public License 2.0
+
+JaCoCo Maven Plugin
+  Copyright (c) 2009, 2024 Mountainminds GmbH & Co. KG and Contributors
+  Licensed under the Eclipse Public License 2.0
+
+git-commit-id-plugin
+  Copyright (C) 2010 Konrad Malawski
+  Licensed under the GNU Lesser General Public License v3.0
+
+Apache Maven Plugins
+  Copyright 2001-2024 The Apache Software Foundation
+  Licensed under the Apache License, Version 2.0
+
+Sonatype Central Publishing Maven Plugin
+  Copyright (c) 2022-present Sonatype, Inc.
+  Licensed under the Apache License, Version 2.0
+
+For complete license texts, please refer to the respective project homepages
+listed in the package information above.
+================================================================================
