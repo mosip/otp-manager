@@ -1,4 +1,4 @@
-[![Maven Package upon a push](https://github.com/mosip/otp-manager/actions/workflows/push-trigger.yml/badge.svg?branch=release-1.3.x)](https://github.com/mosip/otp-manager/actions/workflows/push_trigger.yml)
+[![Maven Package upon a push](https://github.com/mosip/otp-manager/actions/workflows/push-trigger.yml/badge.svg?branch=release-1.3.x)](https://github.com/mosip/otp-manager/actions/workflows/push-trigger.yml)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=mosip_otp-manager&metric=alert_status)](https://sonarcloud.io/dashboard?branch=release-1.3.x&id=mosip_otp-manager)
 
 # OTP Manager

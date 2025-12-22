@@ -7,7 +7,7 @@
 	<groupId>io.mosip.kernel</groupId>
 
 	<artifactId>kernel-otpmanager-service</artifactId>
-	<version>1.3.0-SNAPSHOT</version>
+	<version>1.3.0</version>
 	<properties>
 		<configuration-skip46>false</configuration-skip46>
 		<configuration-skip>false</configuration-skip>
@@ -209,11 +209,11 @@
 		<aspectjweaver.version>1.8.12</aspectjweaver.version>
 		<micrometer.core.version>1.4.2</micrometer.core.version>
 		<micrometer.registry.prometheus.version>1.4.2</micrometer.registry.prometheus.version>
-		<kernel.core.version>1.3.0-SNAPSHOT</kernel.core.version>
-		<kernel.bom.version>1.3.0-SNAPSHOT</kernel.bom.version>
-		<kernel.auth-adapter.version>1.3.0-SNAPSHOT</kernel.auth-adapter.version>
-		<kernel.dataaccess-hibernate.version>1.3.0-SNAPSHOT</kernel.dataaccess-hibernate.version>
-		<kernel.logger.version>1.3.0-SNAPSHOT</kernel.logger.version>
+		<kernel.core.version>1.3.0</kernel.core.version>
+		<kernel.bom.version>1.3.0</kernel.bom.version>
+		<kernel.auth-adapter.version>1.3.0</kernel.auth-adapter.version>
+		<kernel.dataaccess-hibernate.version>1.3.0</kernel.dataaccess-hibernate.version>
+		<kernel.logger.version>1.3.0</kernel.logger.version>
 		<jacoco.maven.plugin.version>0.8.11</jacoco.maven.plugin.version>
 		<springdoc.version>1.5.10</springdoc.version>
 		<maven.deploy.plugin.version>3.1.1</maven.deploy.plugin.version>
