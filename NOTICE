@@ -1,0 +1,28 @@
+MOSIP
+Copyright (c) 2022 Modular Open Source Identity Platform
+
+This product includes software developed at
+The Apache Software Foundation (https://www.apache.org/).
+
+Third-party attributions:
+
+- Portions of this software are licensed under the Apache License 2.0
+  and include NOTICE information from their original authors.
+  Attribution is hereby retained for the following components:
+
+    • Spring Boot & Spring Security
+    • SpringDoc OpenAPI (UI & Maven Plugin)
+    • JSON-Simple
+    • Central Publishing Maven Plugin (Sonatype)
+    • Git Commit ID Maven Plugin
+    • Apache Maven Plugins
+      (maven-surefire-plugin, maven-gpg-plugin,
+       maven-javadoc-plugin, maven-source-plugin)
+
+  These components retain their respective copyrights and
+  NOTICE obligations under the Apache License 2.0.
+
+All other included third-party software components are licensed under
+licenses that do not require NOTICE attribution (PostgreSQL, EPL-2.0,
+MIT, BSD, ISC, or similar permissive licenses). Their license texts
+are provided in the accompanying LICENSE and THIRD-PARTY-NOTICES files.
