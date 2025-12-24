@@ -1,0 +1,61 @@
+THIRD-PARTY-NOTICES
+
+This project includes third-party packages that are distributed under various open-source licenses. Below is a list of packages and their associated licenses.
+
+================================================================================
+Package: Spring Boot & Spring Security 
+(Starter Security, Config Processor, Security Test, Spring Boot Maven Plugin)
+Version: 3.2.x family (from SBOM)
+License: Apache License 2.0
+Homepage: https://spring.io/projects/spring-boot
+================================================================================
+
+================================================================================
+Package: SpringDoc OpenAPI 
+(OpenAPI UI, SpringDoc Maven Plugin)
+Version: UI + Plugin versions not specified in SBOM
+License: Apache License 2.0 (Inferred from project’s official repository)
+Homepage: https://springdoc.org
+================================================================================
+
+================================================================================
+Package: PostgreSQL JDBC Driver
+Version: 42.2.2
+License: BSD 2-Clause License (Simplified BSD)
+Homepage: https://jdbc.postgresql.org/
+================================================================================
+
+================================================================================
+Package: JSON Simple (com.googlecode.json-simple:json-simple)
+Version: Not specified in SBOM
+License: Apache License 2.0 (Inferred from project’s official repository)
+Homepage: https://code.google.com/archive/p/json-simple/
+================================================================================
+
+================================================================================
+Package: pl.project13.maven:git-commit-id-plugin
+Version: 3.0.1
+License: GNU Lesser General Public License v3.0 (LGPL-3.0)
+Homepage: https://github.com/git-commit-id/git-commit-id-maven-plugin
+================================================================================
+
+================================================================================
+Package: Apache Maven Plugins 
+(maven-surefire-plugin, maven-gpg-plugin, maven-javadoc-plugin, maven-source-plugin)
+Version:
+  - maven-surefire-plugin: 2.22.0
+  - maven-gpg-plugin: 1.5
+  - maven-javadoc-plugin: 3.2.0
+  - maven-source-plugin: 2.2.1
+License: Apache License 2.0
+Homepage: https://maven.apache.org/plugins/
+================================================================================
+
+================================================================================
+Package: org.junit.vintage:junit-vintage-engine
+Version: Not specified
+License: Eclipse Public License 2.0 (EPL-2.0)
+Homepage: https://junit.org/junit5/
+================================================================================
+
+Full license texts and additional details for each of the above packages are available in the license/ directory of this repository. Please refer to those files or the original source of each package for complete legal terms and conditions.
