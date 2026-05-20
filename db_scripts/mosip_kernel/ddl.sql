@@ -1,4 +1,4 @@
-\c mosip_kernel 
+\c :mosipdbname
 
 \ir ddl/kernel-otp_transaction.sql
 
