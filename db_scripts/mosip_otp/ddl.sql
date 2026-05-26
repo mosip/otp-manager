@@ -1,3 +1,3 @@
-\c mosip_otp 
+\c :mosipdbname
 
 \ir ddl/otp-otp_transaction.sql

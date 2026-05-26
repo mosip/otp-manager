@@ -1,1 +1,1 @@
-drop role if exists otpuser;
+drop role if exists :dbuname;

@@ -1,4 +1,4 @@
-CREATE DATABASE mosip_otp 
+CREATE DATABASE :mosipdbname
 	ENCODING = 'UTF8' 
 	LC_COLLATE = 'en_US.UTF-8' 
 	LC_CTYPE = 'en_US.UTF-8' 
@@ -6,11 +6,11 @@ CREATE DATABASE mosip_otp
 	OWNER = postgres
 	TEMPLATE  = template0;
 
-COMMENT ON DATABASE mosip_otp IS 'OTP transactions and related data is stored in this database';
+COMMENT ON DATABASE :mosipdbname IS 'OTP transactions and related data is stored in this database';
 
-\c mosip_otp postgres
+\c :mosipdbname postgres
 
 DROP SCHEMA IF EXISTS otp CASCADE;
 CREATE SCHEMA otp;
 ALTER SCHEMA otp OWNER TO postgres;
-ALTER DATABASE mosip_otp SET search_path TO otp,pg_catalog,public;
+ALTER DATABASE :mosipdbname SET search_path TO otp,pg_catalog,public;

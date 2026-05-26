@@ -1,16 +1,16 @@
-\c mosip_otp 
+\c :mosipdbname
 
 GRANT CONNECT
-   ON DATABASE mosip_otp
-   TO otpuser;
+   ON DATABASE :mosipdbname
+   TO :dbuname;
 
 GRANT USAGE
    ON SCHEMA otp 
-   TO otpuser;
+   TO :dbuname;
 
 GRANT SELECT,INSERT,UPDATE,DELETE,TRUNCATE,REFERENCES
    ON ALL TABLES IN SCHEMA otp 
-   TO otpuser;
+   TO :dbuname;
 
 ALTER DEFAULT PRIVILEGES IN SCHEMA otp
-	GRANT SELECT,INSERT,UPDATE,DELETE,REFERENCES ON TABLES TO otpuser;
+	GRANT SELECT,INSERT,UPDATE,DELETE,REFERENCES ON TABLES TO :dbuname;
