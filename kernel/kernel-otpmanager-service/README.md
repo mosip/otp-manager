@@ -2,7 +2,7 @@
 
 ## Overview
 This service provides functions to generate and validate OTP.
- 
+
 ## Build & run (for developers)
 The project requires JDK 21.0.3
 and mvn version - 3.9.6.

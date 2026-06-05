@@ -1,5 +1,5 @@
-[![Maven Package upon a push](https://github.com/mosip/otp-manager/actions/workflows/push-trigger.yml/badge.svg?branch=develop)](https://github.com/mosip/otp-manager/actions/workflows/push_trigger.yml)
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=mosip_otp-manager&metric=alert_status)](https://sonarcloud.io/dashboard?branch=develop&id=mosip_otp-manager)
+[![Maven Package upon a push](https://github.com/mosip/otp-manager/actions/workflows/push-trigger.yml/badge.svg?branch=release-1.3.x)](https://github.com/mosip/otp-manager/actions/workflows/push-trigger.yml)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=mosip_otp-manager&metric=alert_status)](https://sonarcloud.io/dashboard?branch=release-1.3.x&id=mosip_otp-manager)
 
 # OTP Manager
 
@@ -29,7 +29,7 @@ There are three ways to set up the OTP Manager service locally:
 - Maven 3.9.x
 - PostgreSQL 10 or higher
 - Docker (for Docker-based setup)
-- Build and run config server (refer to [MOSIP Configuration](https://github.com/mosip/mosip-config/blob/master/README.md) for more details) 
+- Build and run config server (refer to [MOSIP Configuration](https://github.com/mosip/mosip-config/blob/master/README.md) for more details)
 
 ## Database Setup
 The OTP Manager service requires a PostgreSQL database.
@@ -79,13 +79,13 @@ Before running this service, make sure the config service is running.
 
 2. **Download Auth Adapter (Optional)**
    If you need to use a specific version of the auth adapter or want to manage it separately, download it from Maven Central:
-   
+
    - **Maven Central**: [kernel-auth-adapter](https://search.maven.org/search?q=g:io.mosip.kernel%20AND%20a:kernel-auth-adapter)
    - **Direct Download**: Replace `VERSION` with the desired version (e.g., `1.2.0.1`)
      ```text
      https://repo1.maven.org/maven2/io/mosip/kernel/kernel-auth-adapter/{VERSION}/kernel-auth-adapter-{VERSION}.jar
      ```
-   
+
    ```bash
    # Create lib directory
    mkdir -p kernel/kernel-otpmanager-service/lib
@@ -94,7 +94,7 @@ Before running this service, make sure the config service is running.
    cd kernel/kernel-otpmanager-service/lib
    wget https://repo1.maven.org/maven2/io/mosip/kernel/kernel-auth-adapter/{VERSION}/kernel-auth-adapter-{VERSION}.jar -O kernel-auth-adapter.jar
    ```
-   
+
    Or using curl:
    ```bash
    curl -o kernel-auth-adapter.jar https://repo1.maven.org/maven2/io/mosip/kernel/kernel-auth-adapter/{VERSION}/kernel-auth-adapter-{VERSION}.jar
@@ -102,13 +102,13 @@ Before running this service, make sure the config service is running.
 
 3. **Run the Service**
    Navigate to the service directory and run the application.
-   
+
    **If you downloaded auth adapter manually:**
    ```bash
    cd kernel/kernel-otpmanager-service
    java -jar -Dloader.path=./lib -Dspring.profiles.active=local target/kernel-otpmanager-service-*.jar
    ```
-   
+
    **If using built-in dependency (default):**
    ```bash
    cd kernel/kernel-otpmanager-service
