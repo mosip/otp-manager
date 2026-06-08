@@ -7,7 +7,7 @@
 	<groupId>io.mosip.kernel</groupId>
 
 	<artifactId>kernel-otpmanager-service</artifactId>
-	<version>1.2.1-SNAPSHOT</version>
+	<version>1.4.0-SNAPSHOT</version>
 	<properties>
 		<configuration-skip46>false</configuration-skip46>
 		<configuration-skip>false</configuration-skip>
@@ -17,6 +17,7 @@
 		<maven.compiler.source>21</maven.compiler.source>
 		<maven.compiler.target>21</maven.compiler.target>
 		<maven.compiler.version>3.8.0</maven.compiler.version>
+		<spring.boot.version>3.2.3</spring.boot.version>
 		<!-- <maven.surefire.plugin.version>2.22.0</maven.surefire.plugin.version> -->
 
 		<maven.jar.plugin.version>3.0.2</maven.jar.plugin.version>
@@ -112,7 +113,6 @@
 		<micrometer.registry.prometheus.version>1.4.2</micrometer.registry.prometheus.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-		<!-- maven -->
 		<!-- <maven.surefire.plugin.version>2.22.0</maven.surefire.plugin.version> -->
 
 		<maven.jar.plugin.version>3.0.2</maven.jar.plugin.version>
@@ -209,13 +209,14 @@
 		<aspectjweaver.version>1.8.12</aspectjweaver.version>
 		<micrometer.core.version>1.4.2</micrometer.core.version>
 		<micrometer.registry.prometheus.version>1.4.2</micrometer.registry.prometheus.version>
-		<kernel.core.version>1.2.1-SNAPSHOT</kernel.core.version>
-		<kernel.auth-adapter.version>1.2.1-SNAPSHOT</kernel.auth-adapter.version>
-		<kernel.dataaccess-hibernate.version>1.2.1-SNAPSHOT</kernel.dataaccess-hibernate.version>
-		<kernel.logger.version>1.2.1-SNAPSHOT</kernel.logger.version>
+		<kernel.core.version>1.4.0-SNAPSHOT</kernel.core.version>
+		<kernel.bom.version>1.4.0-SNAPSHOT</kernel.bom.version>
+		<kernel.auth-adapter.version>1.4.0-SNAPSHOT</kernel.auth-adapter.version>
+		<kernel.dataaccess-hibernate.version>1.4.0-SNAPSHOT</kernel.dataaccess-hibernate.version>
+		<kernel.logger.version>1.4.0-SNAPSHOT</kernel.logger.version>
 		<jacoco.maven.plugin.version>0.8.11</jacoco.maven.plugin.version>
 		<springdoc.version>1.5.10</springdoc.version>
-		<maven.deploy.plugin.version>2.8.1</maven.deploy.plugin.version>
+		<maven.deploy.plugin.version>3.1.1</maven.deploy.plugin.version>
 		<central.publishing.maven.plugin.version>0.7.0</central.publishing.maven.plugin.version>
         <sonar.coverage.exclusions>
             **/config/**,
@@ -223,7 +224,7 @@
             **/dto/**,
             **/entity/**,
             **/exception/**,
-            **/constant/**
+            **/constant/**,
         </sonar.coverage.exclusions>
         <sonar.cpd.exclusions>**/dto/**,**/entity/**,**/config/**</sonar.cpd.exclusions>
     </properties>
@@ -236,7 +237,7 @@
 			<dependency>
 				<groupId>io.mosip.kernel</groupId>
 				<artifactId>kernel-bom</artifactId>
-				<version>1.2.1-SNAPSHOT</version>
+				<version>${kernel.bom.version}</version>
 				<type>pom</type>
 			    <scope>import</scope>
 			</dependency>
@@ -371,6 +372,7 @@
 				<artifactId>central-publishing-maven-plugin</artifactId>
 				<version>${central.publishing.maven.plugin.version}</version>
 				<extensions>true</extensions>
+
 				<configuration>
 					<publishingServerId>ossrh</publishingServerId>
 					<autoPublish>false</autoPublish>
@@ -524,7 +526,7 @@
 				<dependency>
 					<groupId>io.mosip.kernel</groupId>
 					<artifactId>kernel-auth-adapter</artifactId>
-					<version>${project.version}</version>
+					<version>${kernel.auth-adapter.version}</version>
 				</dependency>
 			</dependencies>
 			<build>
