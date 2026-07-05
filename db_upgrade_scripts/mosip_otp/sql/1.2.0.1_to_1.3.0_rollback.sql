@@ -1,5 +1,5 @@
 -- Drop database
-DROP DATABASE IF EXISTS mosip_otp;
+DROP DATABASE IF EXISTS :mosipdbname;
 
 -- Drop role
-drop role if exists otpuser;
+drop role if exists :dbuname;
