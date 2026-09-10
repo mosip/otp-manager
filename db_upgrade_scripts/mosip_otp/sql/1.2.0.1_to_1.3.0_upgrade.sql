@@ -1,4 +1,4 @@
-CREATE DATABASE mosip_otp
+CREATE DATABASE :mosipdbname
 	ENCODING = 'UTF8'
 	LC_COLLATE = 'en_US.UTF-8'
 	LC_CTYPE = 'en_US.UTF-8'
@@ -6,27 +6,27 @@ CREATE DATABASE mosip_otp
 	OWNER = postgres
 	TEMPLATE  = template0;
 
-COMMENT ON DATABASE mosip_otp IS 'OTP transactions and related data is stored in this database';
+COMMENT ON DATABASE :mosipdbname IS 'OTP transactions and related data is stored in this database';
 
-\c mosip_otp
+\c :mosipdbname
 
 DROP SCHEMA IF EXISTS otp CASCADE;
 CREATE SCHEMA otp;
 ALTER SCHEMA otp OWNER TO postgres;
-ALTER DATABASE mosip_otp SET search_path TO otp,pg_catalog,public;
+ALTER DATABASE :mosipdbname SET search_path TO otp,pg_catalog,public;
 
-CREATE ROLE otpuser WITH
+CREATE ROLE :dbuname WITH
 	INHERIT
 	LOGIN
 	PASSWORD :dbuserpwd;
 
 GRANT CONNECT
-   ON DATABASE mosip_otp
-   TO otpuser;
+   ON DATABASE :mosipdbname
+   TO :dbuname;
 
 GRANT USAGE
    ON SCHEMA otp
-   TO otpuser;
+   TO :dbuname;
 
 -- object: otp.otp_transaction | type: TABLE --
 -- DROP TABLE IF EXISTS otp.otp_transaction CASCADE;
@@ -85,9 +85,9 @@ COMMENT ON COLUMN otp.otp_transaction.del_dtimes IS 'Deleted DateTimestamp : Dat
 
 GRANT SELECT,INSERT,UPDATE,DELETE,TRUNCATE,REFERENCES
    ON ALL TABLES IN SCHEMA otp
-   TO otpuser;
+   TO :dbuname;
 
 ALTER DEFAULT PRIVILEGES IN SCHEMA otp
    GRANT SELECT,INSERT,UPDATE,DELETE,TRUNCATE,REFERENCES
    ON TABLES
-   TO otpuser;
+   TO :dbuname;
